@@ -4,7 +4,12 @@ const App = () => {
     const [response, setResponse] = useState('');
 
     const handleSend = () => {
-        setResponse(`You said: ${input}`);
+        if(input.trim() === '') return;
+
+        setResponse('Thinking....');
+        setTimeout(()=> {
+            setResponse(`You asked: ${input}\nAI response: This is a simulated response to your question.`);
+        },500);
         setInput('');
     };
 
