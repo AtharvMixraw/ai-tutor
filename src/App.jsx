@@ -1,56 +1,77 @@
 import React, { useState } from 'react';
-// Import fetch
+import Header from './components/Header';
+import ChatContainer from './components/ChatContainer';
+import InputArea from './components/InputArea';
+import { sendMessageToAI } from './services/aiService';
+import './App.css';
 
 const App = () => {
-  const [input, setInput] = useState('');
-  const [response, setResponse] = useState('');
+  const [messages, setMessages] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSend = async () => {
-    if (input.trim() === '') return;
+  const handleSendMessage = async (input) => {
+    if (input.trim() === '' || isLoading) return;
 
-    setResponse('Thinking...');
+    const userMessage = {
+      id: Date.now(),
+      type: 'user',
+      content: input.trim(),
+      timestamp: new Date()
+    };
+
+    setMessages(prev => [...prev, userMessage]);
+    setIsLoading(true);
 
     try {
-      const res = await fetch('http://127.0.0.1:11434/api/generate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'llama3.2',  // or your pulled model
-          prompt: input,
-          stream: false
-        })
-      });
+      const aiResponse = await sendMessageToAI(input);
+      
+      const aiMessage = {
+        id: Date.now() + 1,
+        type: 'ai',
+        content: aiResponse,
+        timestamp: new Date()
+      };
 
-      const data = await res.json();
-      setResponse(data.response);
+      setMessages(prev => [...prev, aiMessage]);
     } catch (err) {
       console.error(err);
-      setResponse('Error contacting AI model. Is Ollama running?');
+      const errorMessage = {
+        id: Date.now() + 1,
+        type: 'ai',
+        content: 'Error contacting AI model. Is Ollama running?',
+        timestamp: new Date(),
+        isError: true
+      };
+      setMessages(prev => [...prev, errorMessage]);
     }
 
-    setInput('');
+    setIsLoading(false);
+  };
+
+  const clearChat = () => {
+    if (window.confirm('Are you sure you want to clear the chat history?')) {
+      setMessages([]);
+    }
+  };
+
+  const copyMessage = (content) => {
+    navigator.clipboard.writeText(content).then(() => {
+      console.log('Message copied to clipboard');
+    });
   };
 
   return (
-    <div style={{ padding: '20px', fontFamily: 'Arial' }}>
-      <h1>AI Tutor</h1>
-
-      <textarea
-        rows="4"
-        cols="50"
-        placeholder="Ask your question..."
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
+    <div className="app">
+      <Header onClearChat={clearChat} hasMessages={messages.length > 0} />
+      <ChatContainer 
+        messages={messages} 
+        isLoading={isLoading} 
+        onCopyMessage={copyMessage}
       />
-
-      <div style={{ marginTop: '10px' }}>
-        <button onClick={handleSend}>Send</button>
-      </div>
-
-      <div style={{ marginTop: '20px', whiteSpace: 'pre-wrap' }}>
-        <strong>AI Response:</strong>
-        <div>{response}</div>
-      </div>
+      <InputArea 
+        onSendMessage={handleSendMessage} 
+        isLoading={isLoading} 
+      />
     </div>
   );
 };

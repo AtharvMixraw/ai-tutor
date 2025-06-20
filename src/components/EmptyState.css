@@ -1,0 +1,14 @@
+.empty-state {
+    text-align: center;
+    color: #7f8c8d;
+    margin-top: 50px;
+    font-size: 18px;
+  }
+  
+  .welcome-title {
+    margin-bottom: 10px;
+  }
+  
+  .welcome-subtitle {
+    margin: 0;
+  }

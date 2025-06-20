@@ -1,0 +1,75 @@
+.message-wrapper {
+    display: flex;
+    margin-bottom: 8px;
+  }
+  
+  .message-wrapper.user {
+    justify-content: flex-end;
+  }
+  
+  .message-wrapper.ai {
+    justify-content: flex-start;
+  }
+  
+  .message-content {
+    max-width: 70%;
+    min-width: 200px;
+  }
+  
+  .message-bubble {
+    padding: 12px 16px;
+    border-radius: 18px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    position: relative;
+  }
+  
+  .message-bubble.user {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .message-bubble.ai {
+    background-color: white;
+    color: #2c3e50;
+  }
+  
+  .message-bubble.error {
+    background-color: #e74c3c;
+    color: white;
+  }
+  
+  .copy-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+  
+  .copy-button:hover {
+    opacity: 1;
+  }
+  
+  .timestamp {
+    font-size: 12px;
+    color: #7f8c8d;
+    margin-top: 4px;
+  }
+  
+  .timestamp.user {
+    text-align: right;
+    padding-right: 16px;
+  }
+  
+  .timestamp.ai {
+    text-align: left;
+    padding-left: 16px;
+  }
