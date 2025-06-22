@@ -1,17 +1,13 @@
 import React from 'react';
+import ClipLoader from 'react-spinners/ClipLoader';
 import './LoaderScreen.css';
 
-const LoaderScreen = ({ message = "Initializing your application..." }) => {
+const LoaderScreen = ({ message = "Initializing your AI Tutor..." }) => {
     return (
         <div className="loader-screen">
-            <div className="loader-animation">
-                <div className="loader-dot"></div>
-                <div className="loader-dot"></div>
-                <div className="loader-dot"></div>
-                <div className="loader-dot"></div>
-            </div>
+            <ClipLoader color="#4cc9f0" size={80} speedMultiplier={1.2} />
             <div className="loader-text">{message}</div>
-            <div className="loader-subtext">This will only take a moment</div>
+            <div className="loader-subtext">Please wait while we set things up...</div>
         </div>
     );
 };
