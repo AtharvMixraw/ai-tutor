@@ -1,5 +1,5 @@
 const path = require('path');
-
+const webpack = require('webpack');
 module.exports = {
   entry: './src/index.js',
   mode: 'development',
@@ -26,7 +26,26 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    fallback: {
+      crypto: require.resolve('crypto-browserify'),
+      stream: require.resolve('stream-browserify'),
+      buffer: require.resolve('buffer'),
+      util: require.resolve('util'),
+      assert: require.resolve('assert/'),
+      os: require.resolve('os-browserify/browser'),
+      https: require.resolve('https-browserify'),
+      http: require.resolve('stream-http'),
+      path: require.resolve('path-browserify'),
+      zlib: require.resolve('browserify-zlib'),
+      fs: false, net: false, tls: false // not needed in renderer
+    }
   },
-  target: 'electron-renderer'
+  target: 'web',
+  plugins: [
+    new webpack.ProvidePlugin({
+      Buffer: ['buffer', 'Buffer'],
+      process: 'process/browser',
+    })
+  ]
 };
