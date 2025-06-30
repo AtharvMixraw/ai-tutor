@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "assert": "^2.1.0",
+    "dotenv-webpack": "^8.1.1",
     "firebase": "^11.9.1",
     "node-fetch": "^3.3.2",
     "react": "^19.1.0",
