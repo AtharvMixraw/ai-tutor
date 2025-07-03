@@ -1,0 +1,156 @@
+/* src/components/SignupForm.css */
+.signup-container {
+    display: flex;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .left-panel {
+    flex: 1;
+    background-image: url('../assets/img.png'); /* Replace with your own image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+  }
+  
+  .overlay {
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    height: 100%;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+  
+  .overlay h2 {
+    font-size: 28px;
+    margin-bottom: 1rem;
+  }
+  
+  .overlay p {
+    font-size: 14px;
+    margin-bottom: 2rem;
+  }
+  
+  .overlay span a {
+    color: #fff;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
+  .right-panel {
+    flex: 1;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  }
+  
+  .form {
+    width: 80%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .form label {
+    margin-top: 1rem;
+    font-size: 14px;
+  }
+  
+  .form input {
+    padding: 0.7rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+  }
+  
+  .password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-input-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #555;
+  }
+  
+  .password-toggle:focus {
+    outline: none;
+  }
+  
+  .form .error {
+    color: red;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form button {
+    margin-top: 1.5rem;
+    padding: 0.8rem;
+    background-color: #19c37d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  
+  .form button:hover {
+    background-color: #17b36e;
+  }
+  
+  .separator {
+    text-align: center;
+    margin: 1rem 0;
+    position: relative;
+  }
+  
+  .separator::before,
+  .separator::after {
+    content: "";
+    height: 1px;
+    width: 40%;
+    background-color: #ccc;
+    position: absolute;
+    top: 50%;
+  }
+  
+  .separator::before {
+    left: 0;
+  }
+  
+  .separator::after {
+    right: 0;
+  }
+  
+  .forgot-password {
+    margin-top: 0.5rem;
+    font-size: 13px;
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  
