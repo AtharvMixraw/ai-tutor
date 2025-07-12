@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './SignupForm.css'; // You can reuse SignupForm.css if styles are same
+import './SignupForm.css'; 
 import gsap from 'gsap';
 import { login } from '../../services/authService';
+import ForgotPasswordForm from './ForgotPasswordForm';
 
 const LoginForm = ({ onSuccess, toggleAuthMode }) => {
   const leftPanelRef = useRef(null);
@@ -12,6 +13,8 @@ const LoginForm = ({ onSuccess, toggleAuthMode }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
+
 
   useEffect(() => {
     gsap.from(leftPanelRef.current, {
@@ -75,7 +78,10 @@ const LoginForm = ({ onSuccess, toggleAuthMode }) => {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-
+  if (showForgotPassword) {
+    return <ForgotPasswordForm goBack={() => setShowForgotPassword(false)} />;
+  }
+  
   return (
     <div className="signup-container"> {/* Reuse same CSS class */}
       <div className="left-panel" ref={leftPanelRef}>
@@ -137,9 +143,17 @@ const LoginForm = ({ onSuccess, toggleAuthMode }) => {
           </div>
 
           <div className="form-footer">
-            <a href="/forgot-password" className="forgot-password">
+            <a
+              href="#"
+              className="forgot-password"
+              onClick={(e) => {
+                e.preventDefault();
+                setShowForgotPassword(true);
+              }}
+            >
               Forgot password?
             </a>
+
           </div>
 
           <button type="submit" disabled={isLoading}>

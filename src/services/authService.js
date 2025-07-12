@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged , sendPasswordResetEmail } from 'firebase/auth';
 import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
@@ -19,6 +19,8 @@ const firebaseConfig = {
   export const login  = (email,password) => signInWithEmailAndPassword(auth, email, password);
   export const logout = () => signOut(auth);
   export const onAuthChange = (callback) => onAuthStateChanged(auth,callback);
+  export const resetPassword = (email) => sendPasswordResetEmail(auth, email);
+
 
   export const saveChat = async (uid, chats) => {
     await setDoc(doc(db,"chats",uid), { messages: chats});
