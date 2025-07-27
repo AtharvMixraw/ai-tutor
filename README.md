@@ -172,24 +172,14 @@ ai-tutor/
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ##  Author
 
 **Atharv Mishra**
 - GitHub: [@AtharvMixraw](https://github.com/AtharvMixraw)
 - LinkedIn: [Atharv Mishra](https://www.linkedin.com/in/atharv-mishra-077b0a253/)
-- Email: atharvmishra339@gmail.com
+- Email: antilogatharv@gmail.com
 
-##  Support
 
-If you have any questions or run into issues, please:
-1. Check the [Issues](https://github.com/AtharvMixraw/ai-tutor/issues) page
-2. Create a new issue with detailed information
-3. Contact me directly via email
-
----
 
  **Star this repository if you found it helpful!**
