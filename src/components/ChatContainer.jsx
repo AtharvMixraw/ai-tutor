@@ -1,9 +1,9 @@
-import React, { use, useEffect, useRef} from "react";
+import React, { useEffect, useRef } from "react";
 import MessageBubble from "./MessageBubble";
 import LoadingIndicator from "./LoadingIndicator";
 import EmptyState from "./EmptyState";
 
-const ChatContainer = ({ messages, isLoading, onCopyMessage }) => {
+const ChatContainer = ({ messages, isLoading, isStreaming, onCopyMessage }) => {
     const messagesEndRef = useRef(null);
 
     const scrollToBottom = () => {
@@ -20,16 +20,22 @@ const ChatContainer = ({ messages, isLoading, onCopyMessage }) => {
                 messages.length === 0 ? (
                     <EmptyState/>
                 ) : (
-                    messages.map((message) =>(
+                    messages.map((message, index) => (
                         <MessageBubble
-                            key = {message.id}
+                            key={message.id}
                             message={message}
                             onCopyMessage={onCopyMessage}
+                            // Show typing cursor for the last assistant message while streaming
+                            showTypingCursor={
+                                isStreaming && 
+                                message.role === 'assistant' && 
+                                index === messages.length - 1
+                            }
                         />
                     ))
                 )
             }
-            {isLoading && <LoadingIndicator />}
+            {isLoading && !isStreaming && <LoadingIndicator />}
             <div ref={messagesEndRef} />
         </div>
     );

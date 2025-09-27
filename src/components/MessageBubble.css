@@ -1,85 +1,74 @@
-.message-wrapper {
-    display: flex;
-    margin-bottom: 8px;
-  }
-  
-  .message-wrapper.user {
-    justify-content: flex-end;
-  }
-  
-  .message-wrapper.ai {
-    justify-content: flex-start;
-  }
-  
-  .message-content {
-    max-width: 70%;
-    min-width: 200px;
-  }
-  
-  .message-bubble {
-    padding: 12px 16px;
-    border-radius: 18px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    position: relative;
-  }
-  
-  .message-bubble.user {
-    background-color: #3498db;
-    color: white;
-  }
-  
-  .message-bubble.ai {
-    background-color: white;
-    color: #2c3e50;
-    padding-right: 36px;
-  }
-  
-  .message-bubble.error {
-    background-color: #e74c3c;
-    color: white;
-  }
+/* Your existing styles */
+.message-bubble {
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
 
-  .message-bubble.ai .copy-button {
-    opacity: 0;
-  }
-  
-  .message-bubble.ai:hover .copy-button {
-    opacity: 0.7;
-  }
-  
-  .copy-button {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: rgba(0, 0, 0, 0.1);
-    border: none;
-    border-radius: 4px;
-    padding: 2px 6px; 
-    font-size: 12px;
-    cursor: pointer;
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-    line-height: 1; /* Better alignment */
-  }
-  
-  .copy-button:hover {
-    opacity: 1;
-  }
-  
-  .timestamp {
-    font-size: 12px;
-    color: #7f8c8d;
-    margin-top: 4px;
-  }
-  
-  .timestamp.user {
-    text-align: right;
-    padding-right: 16px;
-  }
-  
-  .timestamp.ai {
-    text-align: left;
-    padding-left: 16px;
-  }
+.message-bubble.user {
+  background-color: #007bff;
+  color: white;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.message-bubble.assistant {
+  background-color: #f1f3f5;
+  color: #333;
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.message-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.message-text {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.copy-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.copy-button:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.message-timestamp {
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 4px;
+  text-align: right;
+}
+
+/* NEW: Typing cursor animation */
+.typing-cursor {
+  animation: blink 1s infinite;
+  color: #007bff;
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Smooth text updates during streaming */
+.message-bubble.assistant .message-text {
+  transition: all 0.1s ease;
+}

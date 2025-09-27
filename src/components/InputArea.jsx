@@ -1,7 +1,7 @@
 import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
 import './InputArea.css';
 
-const InputArea = forwardRef(({ onSendMessage, isLoading, hasMessages }, ref) => {
+const InputArea = forwardRef(({ onSendMessage, isLoading, isStreaming, hasMessages }, ref) => {
     const [input, setInput] = useState('');
     const textareaRef = useRef(null);
 
@@ -29,7 +29,7 @@ const InputArea = forwardRef(({ onSendMessage, isLoading, hasMessages }, ref) =>
     };
 
     const handleSend = () => {
-        if (input.trim() === '' || isLoading) return;
+        if (input.trim() === '' || isLoading || isStreaming) return;
         onSendMessage(input);
         setInput('');
         textareaRef.current.style.height = 'auto';
@@ -42,25 +42,35 @@ const InputArea = forwardRef(({ onSendMessage, isLoading, hasMessages }, ref) =>
         }
     };
 
+    // Show different states based on loading and streaming
+    const getButtonText = () => {
+        if (isStreaming) return 'Streaming...';
+        if (isLoading) return 'Thinking...';
+        return 'Send';
+    };
+
+    const isDisabled = isLoading || isStreaming || input.trim() === '';
+
     return (
         <div className="input-area">
             <div className="input-container">
                 <textarea
                     ref={textareaRef}
                     rows="1"
-                    placeholder="Ask your question..."
+                    placeholder={isStreaming ? "AI is responding..." : "Ask your question..."}
                     value={input}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyPress}
-                    className="input-textarea"
+                    className={`input-textarea ${isDisabled ? 'disabled' : ''}`}
                     autoFocus
+                    disabled={isStreaming} // Disable input while streaming
                 />
                 <button
                     onClick={handleSend}
-                    disabled={isLoading}
-                    className={`send-button ${isLoading ? 'disabled' : ''}`}
+                    disabled={isDisabled}
+                    className={`send-button ${isDisabled ? 'disabled' : ''}`}
                 >
-                    {isLoading ? '...' : 'Send'}
+                    {getButtonText()}
                 </button>
             </div>
         </div>
